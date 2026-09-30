@@ -4,13 +4,20 @@ import { siteConfig } from "../config/siteConfig";
 export const Footer: React.FC = () => {
   return (
     <footer className="relative overflow-hidden bg-ink text-cream pt-14 pb-0 border-t border-ink">
-      {/* Coral Sun Disc Partly Rising Behind Giant Name */}
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[45%] w-72 h-72 sm:w-[420px] sm:h-[420px] rounded-full bg-coral z-0 pointer-events-none select-none"
-      />
-
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
+        {/* 96px round logo-badge.png in the footer */}
+        <div className="flex justify-center mb-8">
+          <img
+            src="/images/logo-badge.png"
+            alt="Takashi's Castle Logo Badge"
+            width={96}
+            height={96}
+            loading="lazy"
+            decoding="async"
+            className="w-24 h-24 object-contain rounded-full shadow-md"
+          />
+        </div>
+
         {/* Text is © + name only */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-10 border-b border-cream/15 text-xs text-cream/70 font-normal">
           <p>© {new Date().getFullYear()} Takashi&apos;s Castle — The Fun Valley.</p>

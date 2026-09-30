@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { siteConfig } from "../config/siteConfig";
-import { ToriiIcon } from "./ToriiIcon";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
@@ -10,10 +9,10 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const toggleBtnRef = useRef<HTMLButtonElement>(null);
+  const [activeSection, setActiveSection] = useState<string>("hero");
   const shouldReduceMotion = useReducedMotion();
+  const toggleBtnRef = useRef<HTMLButtonElement | null>(null);
 
   const navLinks = [
     { label: "Home", href: "#hero", id: "hero" },
@@ -24,13 +23,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
     { label: "Contact", href: "#contact", id: "contact" },
   ];
 
-  // Track scroll position for sticky background change
+  // Scroll threshold detection for background color change
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -45,9 +43,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           }
         });
       },
-      {
-        rootMargin: "-20% 0px -60% 0px",
-      }
+      { rootMargin: "-30% 0px -60% 0px", threshold: 0 }
     );
 
     sectionIds.forEach((id) => {
@@ -58,7 +54,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
     return () => observer.disconnect();
   }, []);
 
-  // Handle ESC key and scroll locking for mobile menu
+  // Lock body scroll when mobile menu is active
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  // Handle ESC key to dismiss mobile drawer
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && mobileMenuOpen) {
@@ -66,26 +74,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
         toggleBtnRef.current?.focus();
       }
     };
-
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [mobileMenuOpen]);
 
   const handleLinkClick = (href: string) => {
     setMobileMenuOpen(false);
-    toggleBtnRef.current?.focus();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+    const targetId = href.replace("#", "");
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -99,13 +97,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
         }`}
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-12">
-          {/* Zone 1: Single text element wordmark + Torii icon */}
+          {/* Zone 1: Single text element wordmark + 36px round logo badge */}
           <a
             href="#hero"
             className="flex items-center gap-2.5 focus-visible:outline-hidden group"
             aria-label="Takashi's Castle Home"
           >
-            <ToriiIcon className="w-6 h-6 text-coral transition-transform duration-150 group-hover:scale-105" />
+            <img
+              src="/images/logo-badge.png"
+              alt="Takashi's Castle Logo"
+              width={36}
+              height={36}
+              className="w-9 h-9 object-contain rounded-full transition-transform duration-150 group-hover:scale-105"
+            />
             <div className="flex flex-col">
               <span className="text-xl font-extrabold tracking-tight text-ink uppercase">
                 {siteConfig.brand.name}
@@ -116,7 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             </div>
           </a>
 
-          {/* Zone 2: Clean text navigation links with 2px blue underline for active link */}
+          {/* Zone 2: Clean text navigation links with 2px coral underline for active link */}
           <nav
             aria-label="Main Navigation"
             className="hidden md:flex items-center gap-7 text-sm font-medium text-ink/70"
@@ -129,7 +133,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                   href={link.href}
                   className={`relative py-1 transition-colors hover:text-ink ${
                     isActive
-                      ? "text-ink border-b-2 border-blue font-extrabold"
+                      ? "text-ink border-b-2 border-coral font-extrabold"
                       : "border-b-2 border-transparent"
                   }`}
                 >
@@ -139,22 +143,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             })}
           </nav>
 
-          {/* Zone 3: Primary action button ("BOOK NOW": coral fill, ink text) + Mobile Toggle */}
+          {/* Zone 3: Primary action button ("BOOK NOW": coral fill, ink text, hover gold) + Mobile Toggle */}
           <div className="flex items-center gap-4">
             <a
               href="#booking"
               onClick={onOpenBooking}
-              className="hidden sm:inline-flex items-center justify-center rounded-none bg-coral px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-ink transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-0"
+              className="hidden sm:inline-flex items-center justify-center rounded-none bg-coral hover:bg-gold px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-ink transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0"
             >
               Book Now
             </a>
 
-            {/* Mobile Menu Toggle Button */}
+            {/* Accessible Hamburger Toggle */}
             <button
               ref={toggleBtnRef}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="flex h-11 w-11 items-center justify-center border border-ink/15 text-ink md:hidden focus-visible:outline-hidden"
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              className="flex h-11 w-11 items-center justify-center border border-ink/20 text-ink md:hidden focus-visible:outline-hidden"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -176,7 +180,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             {/* Top Bar inside Overlay */}
             <div className="flex items-center justify-between border-b border-ink/10 pb-6">
               <div className="flex items-center gap-2.5">
-                <ToriiIcon className="w-6 h-6 text-coral" />
+                <img
+                  src="/images/logo-badge.png"
+                  alt="Takashi's Castle Logo"
+                  width={36}
+                  height={36}
+                  className="w-9 h-9 object-contain rounded-full"
+                />
                 <div>
                   <span className="text-lg font-extrabold tracking-tight text-ink uppercase">
                     {siteConfig.brand.name}
@@ -234,7 +244,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                   setMobileMenuOpen(false);
                   onOpenBooking();
                 }}
-                className="flex w-full items-center justify-center bg-coral py-4 text-sm font-extrabold uppercase tracking-wider text-ink active:opacity-90"
+                className="flex w-full items-center justify-center bg-coral hover:bg-gold py-4 text-sm font-extrabold uppercase tracking-wider text-ink active:opacity-90 transition-colors"
               >
                 Book Now
               </a>

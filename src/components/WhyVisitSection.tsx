@@ -27,7 +27,7 @@ export const WhyVisitSection: React.FC = () => {
     <section
       id="why-visit"
       aria-labelledby="why-visit-heading"
-      className="relative py-20 md:py-28 lg:py-36 bg-cream border-t border-ink/15 overflow-x-clip"
+      className="relative py-20 md:py-28 lg:py-36 bg-sky border-t border-ink/15 overflow-x-clip"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -100,10 +100,10 @@ export const WhyVisitSection: React.FC = () => {
                 aria-hidden="true"
               >
                 {/* Large Coral Sun Disc */}
-                <circle cx="150" cy="180" r="100" fill="#FF5A3C" />
+                <circle cx="150" cy="180" r="100" fill="#EC5B3E" />
 
                 {/* Torii Gate Silhouette in Ink */}
-                <g fill="#17182A">
+                <g fill="#1F2133">
                   {/* Top curved lintel */}
                   <path d="M40 185 C80 180, 220 180, 260 185 C266 186, 266 174, 256 171 C220 166, 80 166, 44 171 C34 174, 34 186, 40 185 Z" />
                   {/* Lower horizontal bar */}

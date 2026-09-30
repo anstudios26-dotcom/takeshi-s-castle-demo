@@ -4,7 +4,7 @@ export const MarqueeStrip: React.FC = () => {
   return (
     <div
       aria-hidden="true"
-      className="w-full overflow-hidden bg-coral text-ink py-3 border-y border-ink select-none"
+      className="w-full overflow-hidden bg-gold text-ink py-3 border-y border-ink select-none"
     >
       <div className="marquee-track flex items-center whitespace-nowrap">
         {Array.from({ length: 12 }).map((_, i) => (

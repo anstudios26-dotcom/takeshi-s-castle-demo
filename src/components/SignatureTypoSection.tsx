@@ -60,7 +60,7 @@ export const SignatureTypoSection: React.FC = () => {
               }}
               className="origin-left"
             >
-              <span className="font-display text-coral text-[1.2em] inline-block">
+              <span className="font-display text-gold text-[1.2em] inline-block">
                 REPEAT.
               </span>
             </motion.div>

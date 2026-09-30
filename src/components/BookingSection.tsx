@@ -110,7 +110,7 @@ Thank you.`;
     <section
       id="booking"
       aria-labelledby="booking-heading"
-      className="relative py-20 md:py-28 lg:py-36 bg-cream border-t border-ink/15"
+      className="relative py-20 md:py-28 lg:py-36 bg-blush border-t border-ink/15"
     >
       <div className="mx-auto max-w-4xl px-6 lg:px-12">
         {/* Headline: READY TO PLAY? with mask-rise reveal */}
@@ -329,7 +329,7 @@ Thank you.`;
           <div className="pt-6">
             <button
               type="submit"
-              className="inline-flex items-center justify-center bg-coral px-10 py-4 text-xs font-extrabold uppercase tracking-wider text-ink transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-0 rounded-none cursor-pointer"
+              className="inline-flex items-center justify-center bg-coral hover:bg-gold px-10 py-4 text-xs font-extrabold uppercase tracking-wider text-ink transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0 rounded-none cursor-pointer"
             >
               <span>Check Availability</span>
             </button>

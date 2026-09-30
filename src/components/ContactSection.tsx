@@ -1,5 +1,6 @@
 import React from "react";
 import { siteConfig } from "../config/siteConfig";
+import { PhotoPlaceholder } from "./PhotoPlaceholder";
 
 export const ContactSection: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ export const ContactSection: React.FC = () => {
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Brand Name Large */}
+          {/* Left Column: Brand Name Large + Entrance Photo */}
           <div className="lg:col-span-5">
             <h2
               id="contact-heading"
@@ -22,7 +23,7 @@ export const ContactSection: React.FC = () => {
               </span>
             </h2>
 
-            <div className="mt-8">
+            <div className="mt-6 mb-8">
               <a
                 href={siteConfig.contact.mapsUrl}
                 target="_blank"
@@ -31,6 +32,20 @@ export const ContactSection: React.FC = () => {
               >
                 Get Directions
               </a>
+            </div>
+
+            {/* Real Venue Entrance Photo beside location details */}
+            <div className="w-full max-w-md">
+              <PhotoPlaceholder
+                src={siteConfig.images.entrance}
+                label="VENUE ENTRANCE — THE FUN VALLEY"
+                alt="Arched entrance of Takashi's Castle — The Fun Valley"
+                aspectRatio="16/10"
+                width={800}
+                height={500}
+                enableHoverEffect={true}
+                className="w-full"
+              />
             </div>
           </div>
 

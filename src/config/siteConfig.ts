@@ -3,7 +3,9 @@
  * North Lakhimpur, Assam, India
  *
  * Rules:
- * - Exactly five palette colors: cream (#FFF8ED), sakura (#FFD9E0), ink (#17182A), coral (#FF5A3C), blue (#3B82F6).
+ * - Exactly nine palette colors:
+ *   cream (#FFF6E5), ink (#1F2133), coral (#EC5B3E), blue (#4C8DF6), sakura (#FFC9D6),
+ *   gold (#F7BE3E), butter (#FFE9A6), sky (#D6E6FF), blush (#FFDCE4).
  * - Single centralized WHATSAPP_NUMBER and buildWhatsAppUrl helper (handles India +91).
  * - Zero invented claims, certifications, or statistics.
  */
@@ -13,8 +15,9 @@ export interface AttractionItem {
   title: string;
   description: string;
   image: string;
-  fallbackColor: "ink" | "blue" | "coral" | "sakura";
+  fallbackColor: "coral" | "blue" | "gold" | "sakura" | "ink";
   iconName: "Gamepad2" | "Activity" | "Glasses" | "Trophy" | "Sparkles";
+  objectPosition?: string;
 }
 
 export interface SiteConfig {
@@ -34,10 +37,14 @@ export interface SiteConfig {
   };
   palette: {
     cream: string;
-    sakura: string;
     ink: string;
     coral: string;
     blue: string;
+    sakura: string;
+    gold: string;
+    butter: string;
+    sky: string;
+    blush: string;
   };
   images: {
     hero: string;
@@ -46,6 +53,7 @@ export interface SiteConfig {
     birthday: string;
     activities: string;
     entrance: string;
+    logoBadge: string;
     attractions: {
       arcade: string;
       trampolines: string;
@@ -55,7 +63,7 @@ export interface SiteConfig {
     };
     gallery: string[];
   };
-  /* CONFIRM THESE WITH THE CLIENT BEFORE SHARING THE DEMO */
+  /* CONFIRM THESE WITH THE CLIENT BEFORE SHARING THE DEMO - Trampolines and rides to confirm */
   attractions: AttractionItem[];
 }
 
@@ -78,48 +86,54 @@ export const siteConfig: SiteConfig = {
       "https://maps.google.com/?q=Takashi%27s+Castle+The+Fun+Valley+North+Lakhimpur+Assam",
   },
   palette: {
-    cream: "#FFF8ED",
-    sakura: "#FFD9E0",
-    ink: "#17182A",
-    coral: "#FF5A3C",
-    blue: "#3B82F6",
+    cream: "#FFF6E5",
+    ink: "#1F2133",
+    coral: "#EC5B3E",
+    blue: "#4C8DF6",
+    sakura: "#FFC9D6",
+    gold: "#F7BE3E",
+    butter: "#FFE9A6",
+    sky: "#D6E6FF",
+    blush: "#FFDCE4",
   },
   images: {
-    hero: "/images/hero.jpg",
-    playArea: "/images/play-area.jpg",
-    kidsPlaying: "/images/kids-playing.jpg",
+    hero: "/images/entrance.jpg",
+    playArea: "/images/play-hall.jpg",
+    kidsPlaying: "/images/kids-corner.jpg",
     birthday: "/images/birthday.jpg",
     activities: "/images/activities.jpg",
     entrance: "/images/entrance.jpg",
+    logoBadge: "/images/logo-badge.png",
     attractions: {
-      arcade: "/images/attraction-arcade.jpg",
-      trampolines: "/images/attraction-trampolines.jpg",
-      vr: "/images/attraction-vr.jpg",
-      games: "/images/attraction-games.jpg",
-      more: "/images/attraction-more.jpg",
+      arcade: "/images/racing-sim.jpg",
+      trampolines: "",
+      vr: "/images/vr-ride.jpg",
+      games: "/images/play-hall.jpg",
+      more: "/images/kids-corner.jpg",
     },
     gallery: [
-      "/images/gallery-01.jpg",
-      "/images/gallery-02.jpg",
-      "/images/gallery-03.jpg",
-      "/images/gallery-04.jpg",
+      "/images/vr-ride.jpg",
+      "/images/entrance.jpg",
+      "/images/kids-corner.jpg",
+      "/images/play-hall.jpg",
     ],
   },
-  /* CONFIRM THESE WITH THE CLIENT BEFORE SHARING THE DEMO */
+  /* CONFIRM THESE WITH THE CLIENT BEFORE SHARING THE DEMO - Trampolines and rides to confirm */
   attractions: [
     {
       id: "arcade",
       title: "Arcade Games",
       description: "Classic and modern games.",
-      image: "/images/attraction-arcade.jpg",
-      fallbackColor: "ink",
+      image: "/images/racing-sim.jpg",
+      fallbackColor: "coral",
       iconName: "Gamepad2",
+      objectPosition: "center 35%",
     },
     {
       id: "trampolines",
       title: "Trampolines",
       description: "Jump, flip and feel the freedom.",
-      image: "/images/attraction-trampolines.jpg",
+      image: "",
       fallbackColor: "blue",
       iconName: "Activity",
     },
@@ -127,15 +141,16 @@ export const siteConfig: SiteConfig = {
       id: "vr",
       title: "VR Experiences",
       description: "Step into new worlds.",
-      image: "/images/attraction-vr.jpg",
-      fallbackColor: "coral",
+      image: "/images/vr-ride.jpg",
+      fallbackColor: "gold",
       iconName: "Glasses",
+      objectPosition: "center 30%",
     },
     {
       id: "games",
       title: "Fun Games",
       description: "Challenges, skills and endless fun.",
-      image: "/images/attraction-games.jpg",
+      image: "/images/play-hall.jpg",
       fallbackColor: "sakura",
       iconName: "Trophy",
     },
@@ -143,7 +158,7 @@ export const siteConfig: SiteConfig = {
       id: "more",
       title: "And More",
       description: "Rides, simulators and surprises.",
-      image: "/images/attraction-more.jpg",
+      image: "/images/kids-corner.jpg",
       fallbackColor: "ink",
       iconName: "Sparkles",
     },

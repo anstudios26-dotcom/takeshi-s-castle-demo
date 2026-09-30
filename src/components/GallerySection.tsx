@@ -23,7 +23,7 @@ export const GallerySection: React.FC = () => {
         <div className="mb-14 sm:mb-20">
           <h2
             id="gallery-heading"
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase text-ink tracking-[-0.03em] leading-[0.95]"
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase text-ink tracking-[-0.035em] leading-[0.92]"
           >
             <div className="overflow-hidden">
               <motion.div
@@ -42,7 +42,7 @@ export const GallerySection: React.FC = () => {
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: shouldReduceMotion ? 0.01 : 0.8, delay: shouldReduceMotion ? 0 : 0.08, ease: [0.16, 1, 0.3, 1] }}
               >
-                <span className="font-display text-coral">INSIDE.</span>
+                <span className="font-display text-blue">INSIDE.</span>
               </motion.div>
             </div>
           </h2>
@@ -59,9 +59,12 @@ export const GallerySection: React.FC = () => {
               transition={clipTransition(0)}
             >
               <PhotoPlaceholder
-                src={siteConfig.images.gallery[0] || "/images/gallery-01.jpg"}
-                label="REAL PHOTO — GALLERY 01"
+                src={siteConfig.images.gallery[0]}
+                label="VENUE PHOTO — VR RIDE"
+                alt="VR motion ride experience at Takashi's Castle The Fun Valley"
                 aspectRatio="4/5"
+                width={810}
+                height={1080}
                 enableHoverEffect={true}
                 className="w-full"
               />
@@ -79,9 +82,13 @@ export const GallerySection: React.FC = () => {
                 transition={clipTransition(0.15)}
               >
                 <PhotoPlaceholder
-                  src={siteConfig.images.gallery[1] || "/images/gallery-02.jpg"}
-                  label="REAL PHOTO — GALLERY 02"
+                  src={siteConfig.images.gallery[1]}
+                  label="VENUE PHOTO — ENTRANCE"
+                  alt="Arched entrance and glowing circular doorway at Takashi's Castle The Fun Valley"
                   aspectRatio="1/1"
+                  objectPosition="center 55%"
+                  width={810}
+                  height={810}
                   enableHoverEffect={true}
                   className="w-full"
                 />
@@ -97,9 +104,12 @@ export const GallerySection: React.FC = () => {
                 transition={clipTransition(0.25)}
               >
                 <PhotoPlaceholder
-                  src={siteConfig.images.gallery[2] || "/images/gallery-03.jpg"}
-                  label="REAL PHOTO — GALLERY 03"
+                  src={siteConfig.images.gallery[2]}
+                  label="VENUE PHOTO — KIDS CORNER"
+                  alt="Kids play corner with cartoon mural and play tent at Takashi's Castle The Fun Valley"
                   aspectRatio="4/3"
+                  width={1080}
+                  height={810}
                   enableHoverEffect={true}
                   className="w-full"
                 />
@@ -114,14 +124,21 @@ export const GallerySection: React.FC = () => {
               whileInView={{ clipPath: "inset(0)" }}
               viewport={{ once: true, margin: "-60px" }}
               transition={clipTransition(0.2)}
+              className="w-full flex justify-center"
             >
-              <PhotoPlaceholder
-                src={siteConfig.images.gallery[3] || "/images/gallery-04.jpg"}
-                label="REAL PHOTO — GALLERY 04"
-                aspectRatio="21/9"
-                enableHoverEffect={true}
-                className="w-full"
-              />
+              <div className="w-full max-w-[1100px]">
+                <PhotoPlaceholder
+                  src={siteConfig.images.gallery[3]}
+                  label="VENUE PHOTO — PLAY HALL"
+                  alt="Grand play hall with neon Game Zone sign at Takashi's Castle The Fun Valley"
+                  aspectRatio="21/9"
+                  objectPosition="center 62%"
+                  width={1080}
+                  height={460}
+                  enableHoverEffect={true}
+                  className="w-full"
+                />
+              </div>
             </motion.div>
           </div>
         </div>

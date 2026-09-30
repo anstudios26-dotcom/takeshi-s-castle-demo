@@ -1,11 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #FFF8ED;
-  --color-sakura: #FFD9E0;
-  --color-ink: #17182A;
-  --color-coral: #FF5A3C;
-  --color-blue: #3B82F6;
+  --color-cream: #FFF6E5;
+  --color-ink: #1F2133;
+  --color-coral: #EC5B3E;
+  --color-blue: #4C8DF6;
+  --color-sakura: #FFC9D6;
+  --color-gold: #F7BE3E;
+  --color-butter: #FFE9A6;
+  --color-sky: #D6E6FF;
+  --color-blush: #FFDCE4;
 
   --font-sans: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
   --font-display: 'Caveat Brush', cursive, sans-serif;
@@ -13,11 +17,15 @@
 }
 
 :root {
-  --cream: #FFF8ED;
-  --sakura: #FFD9E0;
-  --ink: #17182A;
-  --coral: #FF5A3C;
-  --blue: #3B82F6;
+  --cream: #FFF6E5;
+  --ink: #1F2133;
+  --coral: #EC5B3E;
+  --blue: #4C8DF6;
+  --sakura: #FFC9D6;
+  --gold: #F7BE3E;
+  --butter: #FFE9A6;
+  --sky: #D6E6FF;
+  --blush: #FFDCE4;
 }
 
 html {
@@ -95,5 +103,3 @@ body {
     transform: none !important;
   }
 }
-
-

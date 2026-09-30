@@ -28,16 +28,18 @@ export const AttractionsSection: React.FC = () => {
 
   const getFallbackClasses = (color: AttractionItem["fallbackColor"]) => {
     switch (color) {
-      case "ink":
-        return { bg: "bg-ink", text: "text-cream", icon: "text-cream" };
-      case "blue":
-        return { bg: "bg-blue", text: "text-cream", icon: "text-cream" };
       case "coral":
         return { bg: "bg-coral", text: "text-ink", icon: "text-ink" };
+      case "blue":
+        return { bg: "bg-blue", text: "text-cream", icon: "text-cream" };
+      case "gold":
+        return { bg: "bg-gold", text: "text-ink", icon: "text-ink" };
       case "sakura":
         return { bg: "bg-sakura", text: "text-ink", icon: "text-ink" };
-      default:
+      case "ink":
         return { bg: "bg-ink", text: "text-cream", icon: "text-cream" };
+      default:
+        return { bg: "bg-coral", text: "text-ink", icon: "text-ink" };
     }
   };
 
@@ -45,7 +47,7 @@ export const AttractionsSection: React.FC = () => {
     <section
       id="attractions"
       aria-labelledby="attractions-heading"
-      className="relative py-20 md:py-28 lg:py-36 bg-cream border-t border-ink/15 overflow-x-clip"
+      className="relative py-20 md:py-28 lg:py-36 bg-butter border-t border-ink/15 overflow-x-clip"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Headline with Mask-Rise */}
@@ -78,7 +80,7 @@ export const AttractionsSection: React.FC = () => {
                   ease: [0.16, 1, 0.3, 1],
                 }}
               >
-                <span className="font-display text-coral">PLAYGROUND.</span>
+                <span className="font-display text-blue">PLAYGROUND.</span>
               </motion.div>
             </div>
           </h2>
@@ -120,13 +122,19 @@ export const AttractionsSection: React.FC = () => {
                 </div>
 
                 {/* Real Photo Slot */}
-                <div className="absolute inset-0">
-                  <PhotoPlaceholder
-                    src={attraction.image}
-                    label={`REAL PHOTO — ${attraction.title.toUpperCase()}`}
-                    className="w-full h-full"
-                  />
-                </div>
+                {attraction.image && (
+                  <div className="absolute inset-0">
+                    <PhotoPlaceholder
+                      src={attraction.image}
+                      label={`VENUE PHOTO — ${attraction.title.toUpperCase()}`}
+                      alt={`${attraction.title} at Takashi's Castle The Fun Valley`}
+                      objectPosition={attraction.objectPosition}
+                      width={800}
+                      height={600}
+                      className="w-full h-full"
+                    />
+                  </div>
+                )}
 
                 {/* Bottom Scrim (Ink 55% flat fill) & Content */}
                 <div className="absolute bottom-0 left-0 right-0 bg-ink/55 p-6 text-cream">
@@ -172,13 +180,19 @@ export const AttractionsSection: React.FC = () => {
                 </div>
 
                 {/* Photo Slot */}
-                <div className="absolute inset-0">
-                  <PhotoPlaceholder
-                    src={attraction.image}
-                    label={`REAL PHOTO — ${attraction.title.toUpperCase()}`}
-                    className="w-full h-full"
-                  />
-                </div>
+                {attraction.image && (
+                  <div className="absolute inset-0">
+                    <PhotoPlaceholder
+                      src={attraction.image}
+                      label={`VENUE PHOTO — ${attraction.title.toUpperCase()}`}
+                      alt={`${attraction.title} at Takashi's Castle The Fun Valley`}
+                      objectPosition={attraction.objectPosition}
+                      width={600}
+                      height={750}
+                      className="w-full h-full"
+                    />
+                  </div>
+                )}
 
                 {/* Bottom Scrim */}
                 <div className="absolute bottom-0 left-0 right-0 bg-ink/55 p-5 text-cream">

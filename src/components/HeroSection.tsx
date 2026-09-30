@@ -87,7 +87,7 @@ export const HeroSection: React.FC = () => {
             <div className="mt-10 flex flex-wrap items-center gap-6 sm:gap-8">
               <a
                 href="#booking"
-                className="inline-flex items-center justify-center bg-coral px-8 py-4 text-xs font-extrabold uppercase tracking-wider text-ink transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-0 rounded-none group"
+                className="inline-flex items-center justify-center bg-coral hover:bg-gold px-8 py-4 text-xs font-extrabold uppercase tracking-wider text-ink transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0 rounded-none group"
               >
                 <span>Plan Your Visit</span>
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-150 group-hover:translate-x-1" />
@@ -95,7 +95,7 @@ export const HeroSection: React.FC = () => {
 
               <a
                 href="#attractions"
-                className="text-sm font-medium text-ink/75 hover:text-ink underline decoration-1 underline-offset-4 transition-colors"
+                className="text-sm font-medium text-ink/80 hover:text-ink underline decoration-blue decoration-2 underline-offset-4 transition-colors"
               >
                 See what&apos;s inside
               </a>
@@ -106,18 +106,26 @@ export const HeroSection: React.FC = () => {
           <div className="lg:col-span-5 relative mt-8 lg:mt-0">
             {/* Mobile full-bleed container vs Desktop bleeding container */}
             <div className="relative -mx-6 sm:mx-0 lg:-mr-12 xl:-mr-20">
-              {/* Hard-edged coral rectangle offset behind bottom-left corner */}
+              {/* Hard-edged GOLD rectangle offset behind bottom-left corner */}
               <div
                 aria-hidden="true"
-                className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-28 h-28 sm:w-36 sm:h-36 bg-coral z-0 pointer-events-none"
+                className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-28 h-28 sm:w-36 sm:h-36 bg-gold z-0 pointer-events-none"
               />
 
-              {/* Round coral 'hanko' stamp sticker (circle with 楽 in cream, rotated -8deg, static) */}
+              {/* Real logo-badge.png round stamp, about 120px, rotated -8deg in the hero (static) */}
               <div
                 aria-hidden="true"
-                className="absolute -top-4 -left-3 sm:-top-5 sm:-left-4 z-20 h-11 w-11 sm:h-13 sm:w-13 rounded-full bg-coral border-2 border-cream flex items-center justify-center font-kanji font-bold text-cream text-lg sm:text-xl shadow-xs select-none -rotate-8"
+                className="absolute -top-5 -left-5 sm:-top-7 sm:-left-7 z-20 w-[110px] h-[110px] sm:w-[124px] sm:h-[124px] select-none -rotate-8 pointer-events-none drop-shadow-sm"
               >
-                楽
+                <img
+                  src="/images/logo-badge.png"
+                  alt="Takashi's Castle Logo Badge"
+                  width={124}
+                  height={124}
+                  loading="eager"
+                  decoding="async"
+                  className="w-full h-full object-contain rounded-full"
+                />
               </div>
 
               {/* Scene Reveal: clip-path inset(100% 0 0 0) -> inset(0) */}

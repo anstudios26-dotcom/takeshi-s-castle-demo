@@ -8,6 +8,9 @@ interface PhotoPlaceholderProps {
   className?: string;
   priority?: boolean;
   enableHoverEffect?: boolean;
+  objectPosition?: string;
+  width?: number | string;
+  height?: number | string;
 }
 
 export const PhotoPlaceholder: React.FC<PhotoPlaceholderProps> = ({
@@ -18,10 +21,17 @@ export const PhotoPlaceholder: React.FC<PhotoPlaceholderProps> = ({
   className = "",
   priority = false,
   enableHoverEffect = false,
+  objectPosition,
+  width,
+  height,
 }) => {
-  const [hasError, setHasError] = useState(false);
+  const [hasError, setHasError] = useState(!src);
   const [isDev, setIsDev] = useState(false);
   const [userSrc, setUserSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    setHasError(!src);
+  }, [src]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -36,13 +46,18 @@ export const PhotoPlaceholder: React.FC<PhotoPlaceholderProps> = ({
       className={`group relative overflow-hidden bg-ink/[0.06] rounded-none ${className}`}
       style={aspectRatio ? { aspectRatio } : undefined}
     >
-      {!hasError ? (
+      {!hasError && effectiveSrc ? (
         <div className="relative h-full w-full overflow-hidden">
           <img
             src={effectiveSrc}
             alt={alt || label}
+            width={width}
+            height={height}
             loading={priority ? "eager" : "lazy"}
+            decoding="async"
+            referrerPolicy="no-referrer"
             onError={() => setHasError(true)}
+            style={objectPosition ? { objectPosition } : undefined}
             className={`h-full w-full object-cover rounded-none ${
               enableHoverEffect
                 ? "transition-transform duration-700 ease-out group-hover:scale-[1.03] group-hover:translate-x-1.5"
@@ -67,8 +82,8 @@ export const PhotoPlaceholder: React.FC<PhotoPlaceholderProps> = ({
 
           {/* Top-right path target indicator */}
           <div className="relative z-10 flex justify-end">
-            <span className="text-[11px] text-ink/40 tracking-wider">
-              {src}
+            <span className="text-[11px] text-ink/40 tracking-wider font-mono">
+              {src || "FALLBACK"}
             </span>
           </div>
 
