@@ -3,14 +3,48 @@ import { siteConfig } from "../config/siteConfig";
 import { PhotoPlaceholder } from "./PhotoPlaceholder";
 import { motion, useReducedMotion } from "motion/react";
 
+/* Outer div is what the browser watches (never clipped, so it always triggers).
+   The inner div does the clip-path reveal. */
+const Reveal: React.FC<{
+  delay?: number;
+  className?: string;
+  children: React.ReactNode;
+}> = ({ delay = 0, className, children }) => {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.01, margin: "0px 0px -5% 0px" }}
+    >
+      <motion.div
+        variants={{
+          hidden: {
+            opacity: reduce ? 1 : 0,
+            y: reduce ? 0 : 36,
+            clipPath: reduce ? "inset(0)" : "inset(100% 0 0 0)",
+          },
+          show: {
+            opacity: 1,
+            y: 0,
+            clipPath: "inset(0)",
+            transition: {
+              duration: reduce ? 0.01 : 0.8,
+              delay: reduce ? 0 : delay,
+              ease: [0.16, 1, 0.3, 1],
+            },
+          },
+        }}
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  );
+};
+
 export const GallerySection: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
-
-  const cardTransition = (delay = 0) => ({
-    duration: shouldReduceMotion ? 0.01 : 0.8,
-    delay: shouldReduceMotion ? 0 : delay,
-    ease: [0.16, 1, 0.3, 1] as const,
-  });
 
   return (
     <section
@@ -48,20 +82,10 @@ export const GallerySection: React.FC = () => {
           </h2>
         </div>
 
-        {/* 12-Column Asymmetric Grid on Desktop / Alternating Widths on Mobile */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-          {/* (a) Large photo: cols 1–7, 4:5 on desktop | 90% left-aligned on mobile */}
+          {/* (a) Large photo */}
           <div className="w-[90%] sm:w-full lg:col-span-7">
-            <motion.div
-              initial={{
-                opacity: 0,
-                y: shouldReduceMotion ? 0 : 36,
-                clipPath: shouldReduceMotion ? "inset(0)" : "inset(100% 0 0 0)",
-              }}
-              whileInView={{ opacity: 1, y: 0, clipPath: "inset(0)" }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={cardTransition(0)}
-            >
+            <Reveal delay={0}>
               <PhotoPlaceholder
                 src={siteConfig.images.gallery[0]}
                 label="VENUE PHOTO — VR RIDE"
@@ -72,23 +96,13 @@ export const GallerySection: React.FC = () => {
                 enableHoverEffect={true}
                 className="w-full"
               />
-            </motion.div>
+            </Reveal>
           </div>
 
-          {/* Staggered Right Pair: (b) and (c) */}
+          {/* Staggered right pair */}
           <div className="w-full lg:col-span-5 flex flex-col gap-8 lg:gap-16">
-            {/* (b) Small photo: cols 9–12, 1:1, aligned to the top | 75% right-aligned on mobile */}
             <div className="w-[75%] sm:w-[65%] lg:w-full ml-auto">
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: shouldReduceMotion ? 0 : 36,
-                  clipPath: shouldReduceMotion ? "inset(0)" : "inset(100% 0 0 0)",
-                }}
-                whileInView={{ opacity: 1, y: 0, clipPath: "inset(0)" }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={cardTransition(0.12)}
-              >
+              <Reveal delay={0.12}>
                 <PhotoPlaceholder
                   src={siteConfig.images.gallery[1]}
                   label="VENUE PHOTO — ENTRANCE"
@@ -100,21 +114,11 @@ export const GallerySection: React.FC = () => {
                   enableHoverEffect={true}
                   className="w-full"
                 />
-              </motion.div>
+              </Reveal>
             </div>
 
-            {/* (c) Second small photo: cols 8–11, 4:3, staggered down | full width on mobile */}
             <div className="w-full sm:w-[85%] lg:w-full mr-auto lg:ml-0">
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: shouldReduceMotion ? 0 : 36,
-                  clipPath: shouldReduceMotion ? "inset(0)" : "inset(100% 0 0 0)",
-                }}
-                whileInView={{ opacity: 1, y: 0, clipPath: "inset(0)" }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={cardTransition(0.24)}
-              >
+              <Reveal delay={0.24}>
                 <PhotoPlaceholder
                   src={siteConfig.images.gallery[2]}
                   label="VENUE PHOTO — KIDS CORNER"
@@ -125,23 +129,13 @@ export const GallerySection: React.FC = () => {
                   enableHoverEffect={true}
                   className="w-full"
                 />
-              </motion.div>
+              </Reveal>
             </div>
           </div>
 
-          {/* (d) Wide horizontal photo: full width (cols 1–12), 21:9 */}
+          {/* (d) Wide photo */}
           <div className="w-full col-span-1 lg:col-span-12 mt-4 lg:mt-8">
-            <motion.div
-              initial={{
-                opacity: 0,
-                y: shouldReduceMotion ? 0 : 36,
-                clipPath: shouldReduceMotion ? "inset(0)" : "inset(100% 0 0 0)",
-              }}
-              whileInView={{ opacity: 1, y: 0, clipPath: "inset(0)" }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={cardTransition(0.18)}
-              className="w-full flex justify-center"
-            >
+            <Reveal delay={0.18} className="w-full flex justify-center">
               <div className="w-full max-w-[1100px]">
                 <PhotoPlaceholder
                   src={siteConfig.images.gallery[3]}
@@ -155,7 +149,7 @@ export const GallerySection: React.FC = () => {
                   className="w-full"
                 />
               </div>
-            </motion.div>
+            </Reveal>
           </div>
         </div>
       </div>
