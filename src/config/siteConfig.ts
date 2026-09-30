@@ -75,13 +75,15 @@ export const siteConfig: SiteConfig = {
   },
   contact: {
     // Single centralized WhatsApp number definition:
-    whatsappNumber: "REPLACE_WITH_VERIFIED_NUMBER",
-    phonePlaceholder: "[INSERT VERIFIED PHONE]",
-    addressPlaceholder: "[INSERT VERIFIED ADDRESS]",
-    hoursPlaceholder: "[INSERT VERIFIED HOURS]",
-    whatsappDisplayPlaceholder: "[INSERT VERIFIED WHATSAPP]",
+    whatsappNumber: "+91 70997 15941",
+    phonePlaceholder: "+91 70997 15941",
+    addressPlaceholder:
+      "N Lakhimpur Bypass Rd, near Jila Parishad Office, Chaboti, Puta Pukhuri No.2, Assam 787051",
+    hoursPlaceholder:
+      "Open daily from 11:00 AM to 11:00 PM (some listings note starting at 10:00 AM)",
+    whatsappDisplayPlaceholder: "+91 70997 15941",
     mapsUrl:
-      "https://maps.google.com/?q=Takashi%27s+Castle+The+Fun+Valley+North+Lakhimpur+Assam",
+      "https://maps.google.com/?q=Takashi%27s+Castle+The+Fun+Valley+N+Lakhimpur+Bypass+Rd+Chaboti+Assam+787051",
   },
   palette: {
     cream: "#FFF6E5",

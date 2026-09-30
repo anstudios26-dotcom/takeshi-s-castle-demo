@@ -3,20 +3,30 @@ import { buildWhatsAppUrl, isWhatsAppConfigured } from "../config/siteConfig";
 
 export const FloatingWhatsAppCTA: React.FC = () => {
   const [isBookingInView, setIsBookingInView] = useState(false);
+  const [isFooterInView, setIsFooterInView] = useState(false);
   const [showUnconfigured, setShowUnconfigured] = useState(false);
 
   useEffect(() => {
     const bookingEl = document.getElementById("booking");
-    if (!bookingEl) return;
+    const footerEl = document.getElementById("footer") || document.querySelector("footer");
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsBookingInView(entry.isIntersecting);
+      (entries) => {
+        entries.forEach((entry) => {
+          if (bookingEl && entry.target === bookingEl) {
+            setIsBookingInView(entry.isIntersecting);
+          }
+          if (footerEl && entry.target === footerEl) {
+            setIsFooterInView(entry.isIntersecting);
+          }
+        });
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
 
-    observer.observe(bookingEl);
+    if (bookingEl) observer.observe(bookingEl);
+    if (footerEl) observer.observe(footerEl);
+
     return () => observer.disconnect();
   }, []);
 
@@ -33,8 +43,8 @@ export const FloatingWhatsAppCTA: React.FC = () => {
     "Hello Takashi's Castle, I'd like to know more about visiting."
   );
 
-  // Hidden while booking section is in view
-  if (isBookingInView) return null;
+  // Hidden while booking section or footer is in view
+  if (isBookingInView || isFooterInView) return null;
 
   return (
     <aside aria-label="Quick WhatsApp Contact" className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-2">

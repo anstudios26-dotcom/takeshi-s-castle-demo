@@ -1,5 +1,5 @@
 import React from "react";
-import { siteConfig } from "../config/siteConfig";
+import { siteConfig, buildWhatsAppUrl } from "../config/siteConfig";
 import { PhotoPlaceholder } from "./PhotoPlaceholder";
 import { motion, useReducedMotion } from "motion/react";
 
@@ -86,8 +86,8 @@ export const ContactSection: React.FC = () => {
                 <dt className="text-xs font-extrabold uppercase tracking-wider text-ink/60">
                   Address
                 </dt>
-                <dd className="mt-1 font-mono text-base text-ink">
-                  North Lakhimpur, Assam {siteConfig.contact.addressPlaceholder}
+                <dd className="mt-1 font-mono text-base text-ink leading-relaxed">
+                  {siteConfig.contact.addressPlaceholder}
                 </dd>
               </motion.div>
 
@@ -103,7 +103,12 @@ export const ContactSection: React.FC = () => {
                   Phone
                 </dt>
                 <dd className="mt-1 font-mono text-base text-ink">
-                  {siteConfig.contact.phonePlaceholder}
+                  <a
+                    href="tel:+917099715941"
+                    className="hover:text-blue transition-colors focus-visible:outline-hidden"
+                  >
+                    {siteConfig.contact.phonePlaceholder}
+                  </a>
                 </dd>
               </motion.div>
 
@@ -119,7 +124,14 @@ export const ContactSection: React.FC = () => {
                   WhatsApp
                 </dt>
                 <dd className="mt-1 font-mono text-base text-ink">
-                  {siteConfig.contact.whatsappDisplayPlaceholder}
+                  <a
+                    href={buildWhatsAppUrl("Hello Takashi's Castle, I'd like to make an enquiry.") || "https://wa.me/917099715941"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-blue transition-colors focus-visible:outline-hidden"
+                  >
+                    {siteConfig.contact.whatsappDisplayPlaceholder}
+                  </a>
                 </dd>
               </motion.div>
 
@@ -134,7 +146,7 @@ export const ContactSection: React.FC = () => {
                 <dt className="text-xs font-extrabold uppercase tracking-wider text-ink/60">
                   Opening Hours
                 </dt>
-                <dd className="mt-1 font-mono text-base text-ink">
+                <dd className="mt-1 font-mono text-base text-ink leading-relaxed">
                   {siteConfig.contact.hoursPlaceholder}
                 </dd>
               </motion.div>
