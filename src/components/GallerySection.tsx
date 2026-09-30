@@ -6,7 +6,7 @@ import { motion, useReducedMotion } from "motion/react";
 export const GallerySection: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
 
-  const clipTransition = (delay = 0) => ({
+  const cardTransition = (delay = 0) => ({
     duration: shouldReduceMotion ? 0.01 : 0.8,
     delay: shouldReduceMotion ? 0 : delay,
     ease: [0.16, 1, 0.3, 1] as const,
@@ -53,10 +53,14 @@ export const GallerySection: React.FC = () => {
           {/* (a) Large photo: cols 1–7, 4:5 on desktop | 90% left-aligned on mobile */}
           <div className="w-[90%] sm:w-full lg:col-span-7">
             <motion.div
-              initial={{ clipPath: shouldReduceMotion ? "inset(0)" : "inset(100% 0 0 0)" }}
-              whileInView={{ clipPath: "inset(0)" }}
+              initial={{
+                opacity: 0,
+                y: shouldReduceMotion ? 0 : 36,
+                clipPath: shouldReduceMotion ? "inset(0)" : "inset(100% 0 0 0)",
+              }}
+              whileInView={{ opacity: 1, y: 0, clipPath: "inset(0)" }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={clipTransition(0)}
+              transition={cardTransition(0)}
             >
               <PhotoPlaceholder
                 src={siteConfig.images.gallery[0]}
@@ -76,10 +80,14 @@ export const GallerySection: React.FC = () => {
             {/* (b) Small photo: cols 9–12, 1:1, aligned to the top | 75% right-aligned on mobile */}
             <div className="w-[75%] sm:w-[65%] lg:w-full ml-auto">
               <motion.div
-                initial={{ clipPath: shouldReduceMotion ? "inset(0)" : "inset(100% 0 0 0)" }}
-                whileInView={{ clipPath: "inset(0)" }}
+                initial={{
+                  opacity: 0,
+                  y: shouldReduceMotion ? 0 : 36,
+                  clipPath: shouldReduceMotion ? "inset(0)" : "inset(100% 0 0 0)",
+                }}
+                whileInView={{ opacity: 1, y: 0, clipPath: "inset(0)" }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={clipTransition(0.15)}
+                transition={cardTransition(0.12)}
               >
                 <PhotoPlaceholder
                   src={siteConfig.images.gallery[1]}
@@ -98,10 +106,14 @@ export const GallerySection: React.FC = () => {
             {/* (c) Second small photo: cols 8–11, 4:3, staggered down | full width on mobile */}
             <div className="w-full sm:w-[85%] lg:w-full mr-auto lg:ml-0">
               <motion.div
-                initial={{ clipPath: shouldReduceMotion ? "inset(0)" : "inset(100% 0 0 0)" }}
-                whileInView={{ clipPath: "inset(0)" }}
+                initial={{
+                  opacity: 0,
+                  y: shouldReduceMotion ? 0 : 36,
+                  clipPath: shouldReduceMotion ? "inset(0)" : "inset(100% 0 0 0)",
+                }}
+                whileInView={{ opacity: 1, y: 0, clipPath: "inset(0)" }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={clipTransition(0.25)}
+                transition={cardTransition(0.24)}
               >
                 <PhotoPlaceholder
                   src={siteConfig.images.gallery[2]}
@@ -120,10 +132,14 @@ export const GallerySection: React.FC = () => {
           {/* (d) Wide horizontal photo: full width (cols 1–12), 21:9 */}
           <div className="w-full col-span-1 lg:col-span-12 mt-4 lg:mt-8">
             <motion.div
-              initial={{ clipPath: shouldReduceMotion ? "inset(0)" : "inset(100% 0 0 0)" }}
-              whileInView={{ clipPath: "inset(0)" }}
+              initial={{
+                opacity: 0,
+                y: shouldReduceMotion ? 0 : 36,
+                clipPath: shouldReduceMotion ? "inset(0)" : "inset(100% 0 0 0)",
+              }}
+              whileInView={{ opacity: 1, y: 0, clipPath: "inset(0)" }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={clipTransition(0.2)}
+              transition={cardTransition(0.18)}
               className="w-full flex justify-center"
             >
               <div className="w-full max-w-[1100px]">

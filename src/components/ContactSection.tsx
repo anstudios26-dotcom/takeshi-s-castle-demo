@@ -1,18 +1,27 @@
 import React from "react";
 import { siteConfig } from "../config/siteConfig";
 import { PhotoPlaceholder } from "./PhotoPlaceholder";
+import { motion, useReducedMotion } from "motion/react";
 
 export const ContactSection: React.FC = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="relative py-20 md:py-28 lg:py-36 bg-cream border-t border-ink/15"
+      className="relative py-20 md:py-28 lg:py-36 bg-cream border-t border-ink/15 overflow-hidden"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Brand Name Large + Entrance Photo */}
-          <div className="lg:col-span-5">
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5"
+          >
             <h2
               id="contact-heading"
               className="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase text-ink tracking-[-0.035em] leading-[0.92]"
@@ -47,51 +56,89 @@ export const ContactSection: React.FC = () => {
                 className="w-full"
               />
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Simple Definition List (No cards) */}
+          {/* Right Column: Simple Definition List with Staggered Items */}
           <div className="lg:col-span-7">
-            <dl className="space-y-6 sm:space-y-8 divide-y divide-ink/10">
+            <motion.dl
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: shouldReduceMotion ? 0 : 0.1,
+                  },
+                },
+              }}
+              className="space-y-6 sm:space-y-8 divide-y divide-ink/10"
+            >
               {/* Address */}
-              <div className="pt-6 first:pt-0">
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+                }}
+                className="pt-6 first:pt-0"
+              >
                 <dt className="text-xs font-extrabold uppercase tracking-wider text-ink/60">
                   Address
                 </dt>
                 <dd className="mt-1 font-mono text-base text-ink">
                   North Lakhimpur, Assam {siteConfig.contact.addressPlaceholder}
                 </dd>
-              </div>
+              </motion.div>
 
               {/* Phone */}
-              <div className="pt-6">
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+                }}
+                className="pt-6"
+              >
                 <dt className="text-xs font-extrabold uppercase tracking-wider text-ink/60">
                   Phone
                 </dt>
                 <dd className="mt-1 font-mono text-base text-ink">
                   {siteConfig.contact.phonePlaceholder}
                 </dd>
-              </div>
+              </motion.div>
 
               {/* WhatsApp */}
-              <div className="pt-6">
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+                }}
+                className="pt-6"
+              >
                 <dt className="text-xs font-extrabold uppercase tracking-wider text-ink/60">
                   WhatsApp
                 </dt>
                 <dd className="mt-1 font-mono text-base text-ink">
                   {siteConfig.contact.whatsappDisplayPlaceholder}
                 </dd>
-              </div>
+              </motion.div>
 
               {/* Opening Hours */}
-              <div className="pt-6">
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+                }}
+                className="pt-6"
+              >
                 <dt className="text-xs font-extrabold uppercase tracking-wider text-ink/60">
                   Opening Hours
                 </dt>
                 <dd className="mt-1 font-mono text-base text-ink">
                   {siteConfig.contact.hoursPlaceholder}
                 </dd>
-              </div>
-            </dl>
+              </motion.div>
+            </motion.dl>
           </div>
         </div>
       </div>

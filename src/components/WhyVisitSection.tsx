@@ -66,13 +66,35 @@ export const WhyVisitSection: React.FC = () => {
               </div>
             </h2>
 
-            {/* Three columns separated by hairlines (no cards) */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-ink/15 border-y border-ink/15">
+            {/* Three columns separated by hairlines with staggered scroll entrance */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: shouldReduceMotion ? 0 : 0.15,
+                  },
+                },
+              }}
+              className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-ink/15 border-y border-ink/15"
+            >
               {reasons.map((item, idx) => {
                 const IconComponent = item.icon;
                 return (
-                  <div
+                  <motion.div
                     key={idx}
+                    variants={{
+                      hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 32 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+                      },
+                    }}
                     className="py-8 sm:py-10 sm:px-6 first:sm:pl-0 last:sm:pr-0 flex flex-col justify-start"
                   >
                     <IconComponent className="w-6 h-6 text-coral stroke-[1.75] mb-4" />
@@ -82,14 +104,24 @@ export const WhyVisitSection: React.FC = () => {
                     <p className="mt-2 text-sm sm:text-base text-ink/75 leading-relaxed font-normal">
                       {item.copy}
                     </p>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
 
           {/* Right Column: Sakura Panel holding coral sun disc, ink torii silhouette & 楽しい時間 */}
-          <div className="lg:col-span-4 relative flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{
+              duration: shouldReduceMotion ? 0.01 : 0.7,
+              delay: shouldReduceMotion ? 0 : 0.2,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="lg:col-span-4 relative flex items-center justify-center"
+          >
             <div className="w-full max-w-[340px] aspect-[4/5] bg-sakura p-6 flex flex-col items-center justify-between relative overflow-hidden select-none">
               {/* SVG Graphic with Coral Sun Disc and Torii Silhouette */}
               <svg
@@ -132,7 +164,7 @@ export const WhyVisitSection: React.FC = () => {
                 <span>間</span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -86,16 +86,38 @@ export const AttractionsSection: React.FC = () => {
           </h2>
         </div>
 
-        {/* Desktop Accordion: One row of 5 tall panels (~520px height) */}
-        <div className="hidden lg:flex h-[520px] gap-3 w-full">
+        {/* Desktop Accordion: One row of 4 tall panels (~520px height) */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: shouldReduceMotion ? 0 : 0.12,
+              },
+            },
+          }}
+          className="hidden lg:flex h-[520px] gap-3 w-full"
+        >
           {siteConfig.attractions.map((attraction, idx) => {
             const isOpen = activeIdx === idx;
             const fallback = getFallbackClasses(attraction.fallbackColor);
 
             return (
-              <button
+              <motion.button
                 key={attraction.id}
                 type="button"
+                variants={{
+                  hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 36 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+                  },
+                }}
                 onMouseEnter={() => setActiveIdx(idx)}
                 onFocus={() => setActiveIdx(idx)}
                 onClick={() => setActiveIdx(idx)}
@@ -151,19 +173,41 @@ export const AttractionsSection: React.FC = () => {
                     </p>
                   </div>
                 </div>
-              </button>
+              </motion.button>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Mobile: Horizontal Scroll-Snap Carousel (78vw wide panels, 4:5, next peeking) */}
-        <div className="flex lg:hidden overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-6 px-6 no-scrollbar">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: shouldReduceMotion ? 0 : 0.1,
+              },
+            },
+          }}
+          className="flex lg:hidden overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-6 px-6 no-scrollbar"
+        >
           {siteConfig.attractions.map((attraction, idx) => {
             const fallback = getFallbackClasses(attraction.fallbackColor);
 
             return (
-              <div
+              <motion.div
                 key={attraction.id}
+                variants={{
+                  hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 28 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+                  },
+                }}
                 className={`w-[78vw] max-w-[340px] shrink-0 snap-start aspect-[4/5] relative overflow-hidden rounded-none ${fallback.bg}`}
               >
                 {/* Fallback Graphic */}
@@ -203,10 +247,10 @@ export const AttractionsSection: React.FC = () => {
                     {attraction.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

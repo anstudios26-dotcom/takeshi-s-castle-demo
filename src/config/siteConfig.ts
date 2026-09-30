@@ -56,14 +56,12 @@ export interface SiteConfig {
     logoBadge: string;
     attractions: {
       arcade: string;
-      trampolines: string;
       vr: string;
       games: string;
       more: string;
     };
     gallery: string[];
   };
-  /* CONFIRM THESE WITH THE CLIENT BEFORE SHARING THE DEMO - Trampolines and rides to confirm */
   attractions: AttractionItem[];
 }
 
@@ -106,7 +104,6 @@ export const siteConfig: SiteConfig = {
     logoBadge: "/images/logo-badge.png",
     attractions: {
       arcade: "/images/racing-sim.jpg",
-      trampolines: "",
       vr: "/images/vr-ride.jpg",
       games: "/images/play-hall.jpg",
       more: "/images/kids-corner.jpg",
@@ -118,7 +115,6 @@ export const siteConfig: SiteConfig = {
       "/images/play-hall.jpg",
     ],
   },
-  /* CONFIRM THESE WITH THE CLIENT BEFORE SHARING THE DEMO - Trampolines and rides to confirm */
   attractions: [
     {
       id: "arcade",
@@ -130,19 +126,11 @@ export const siteConfig: SiteConfig = {
       objectPosition: "center 35%",
     },
     {
-      id: "trampolines",
-      title: "Trampolines",
-      description: "Jump, flip and feel the freedom.",
-      image: "",
-      fallbackColor: "blue",
-      iconName: "Activity",
-    },
-    {
       id: "vr",
       title: "VR Experiences",
       description: "Step into new worlds.",
       image: "/images/vr-ride.jpg",
-      fallbackColor: "gold",
+      fallbackColor: "blue",
       iconName: "Glasses",
       objectPosition: "center 30%",
     },
@@ -151,7 +139,7 @@ export const siteConfig: SiteConfig = {
       title: "Fun Games",
       description: "Challenges, skills and endless fun.",
       image: "/images/play-hall.jpg",
-      fallbackColor: "sakura",
+      fallbackColor: "gold",
       iconName: "Trophy",
     },
     {
@@ -159,7 +147,7 @@ export const siteConfig: SiteConfig = {
       title: "And More",
       description: "Rides, simulators and surprises.",
       image: "/images/kids-corner.jpg",
-      fallbackColor: "ink",
+      fallbackColor: "sakura",
       iconName: "Sparkles",
     },
   ],

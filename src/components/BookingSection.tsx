@@ -145,10 +145,32 @@ Thank you.`;
           </p>
         </div>
 
-        {/* Clean Underline Form (No cards, only 1px ink/30 underline fields, focus = blue 2px underline) */}
-        <form onSubmit={handleSubmit} noValidate className="space-y-8">
+        {/* Clean Underline Form with Staggered Scroll Entrance */}
+        <motion.form
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: shouldReduceMotion ? 0 : 0.09,
+              },
+            },
+          }}
+          onSubmit={handleSubmit}
+          noValidate
+          className="space-y-8"
+        >
           {/* Row 1: Name & Phone */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-8"
+          >
             <div className="flex flex-col">
               <label
                 htmlFor="booking-name"
@@ -192,10 +214,16 @@ Thank you.`;
                 </span>
               )}
             </div>
-          </div>
+          </motion.div>
 
           {/* Row 2: Children & Adults (Paired naturally) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-8"
+          >
             <div className="flex flex-col">
               <label
                 htmlFor="booking-children"
@@ -237,10 +265,16 @@ Thank you.`;
                 ))}
               </select>
             </div>
-          </div>
+          </motion.div>
 
           {/* Row 3: Date & Time (Paired naturally) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-8"
+          >
             <div className="flex flex-col">
               <label
                 htmlFor="booking-date"
@@ -283,10 +317,16 @@ Thank you.`;
                 ))}
               </select>
             </div>
-          </div>
+          </motion.div>
 
           {/* Row 4: Occasion */}
-          <div className="flex flex-col">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+            }}
+            className="flex flex-col"
+          >
             <label
               htmlFor="booking-occasion"
               className="text-xs font-bold uppercase tracking-wider text-ink/70"
@@ -305,28 +345,40 @@ Thank you.`;
                 </option>
               ))}
             </select>
-          </div>
+          </motion.div>
 
           {/* Row 5: Additional Message */}
-          <div className="flex flex-col">
-            <label
-              htmlFor="booking-message"
-              className="text-xs font-bold uppercase tracking-wider text-ink/70"
-            >
-              Additional Message (Optional)
-            </label>
-            <textarea
-              id="booking-message"
-              rows={3}
-              placeholder="Any specific requests or requirements..."
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="mt-2 w-full bg-transparent border-b border-ink/30 px-0 py-2 text-base text-ink placeholder:text-ink/30 focus:border-b-2 focus:border-blue focus:outline-hidden rounded-none"
-            />
-          </div>
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+            }}
+            className="flex flex-col"
+          >
+              <label
+                htmlFor="booking-message"
+                className="text-xs font-bold uppercase tracking-wider text-ink/70"
+              >
+                Additional Message (Optional)
+              </label>
+              <textarea
+                id="booking-message"
+                rows={3}
+                placeholder="Any specific requests or requirements..."
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                className="mt-2 w-full bg-transparent border-b border-ink/30 px-0 py-2 text-base text-ink placeholder:text-ink/30 focus:border-b-2 focus:border-blue focus:outline-hidden rounded-none"
+              />
+          </motion.div>
 
           {/* Submit Row: Coral background, ink text, no arrow */}
-          <div className="pt-6">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+            }}
+            className="pt-6"
+          >
             <button
               type="submit"
               className="inline-flex items-center justify-center bg-coral hover:bg-gold px-10 py-4 text-xs font-extrabold uppercase tracking-wider text-ink transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0 rounded-none cursor-pointer"
@@ -340,8 +392,8 @@ Thank you.`;
                 WhatsApp number not set yet
               </p>
             )}
-          </div>
-        </form>
+          </motion.div>
+        </motion.form>
 
         {/* Structured WhatsApp Message Output & Copy Fallback */}
         {submittedMessage && (
