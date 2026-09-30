@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FFF8ED;
+  --color-sakura: #FFD9E0;
+  --color-ink: #17182A;
+  --color-coral: #FF5A3C;
+  --color-blue: #3B82F6;
+
+  --font-sans: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
+  --font-display: 'Caveat Brush', cursive, sans-serif;
+  --font-kanji: 'Zen Maru Gothic', sans-serif;
+}
+
+:root {
+  --cream: #FFF8ED;
+  --sakura: #FFD9E0;
+  --ink: #17182A;
+  --coral: #FF5A3C;
+  --blue: #3B82F6;
+}
+
+html {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The ONE accent display font: Caveat Brush upright, max -2deg rotation, 1.2x size */
+.font-display {
+  font-family: 'Caveat Brush', cursive, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  display: inline-block;
+  transform: rotate(-1.5deg);
+  font-size: 1.2em;
+  line-height: 0.9;
+}
+
+/* Zen Maru Gothic for Japanese characters only */
+.font-kanji {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: 700;
+}
+
+/* Accessible focus ring: 2px blue ring */
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* Marquee strip animation: transform translateX only, paused on hover, disabled on reduced-motion */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Prefers-reduced-motion compliance */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+

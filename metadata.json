@@ -1,0 +1,6 @@
+{
+  "name": "Takashi's Castle — The Fun Valley",
+  "description": "Editorial brand and booking website concept for Takashi's Castle: a modern, playful, premium children's entertainment venue.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
