@@ -1,6 +1,7 @@
 import React from "react";
 import { siteConfig, buildWhatsAppUrl } from "../config/siteConfig";
 import { PhotoPlaceholder } from "./PhotoPlaceholder";
+import { VenueMap } from "./VenueMap";
 import { motion, useReducedMotion } from "motion/react";
 
 export const ContactSection: React.FC = () => {
@@ -151,6 +152,21 @@ export const ContactSection: React.FC = () => {
                 </dd>
               </motion.div>
             </motion.dl>
+
+            {/* Visual Map Container */}
+            <motion.div
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{
+                duration: 0.6,
+                delay: shouldReduceMotion ? 0 : 0.15,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="mt-8 pt-8 border-t border-ink/10"
+            >
+              <VenueMap />
+            </motion.div>
           </div>
         </div>
       </div>

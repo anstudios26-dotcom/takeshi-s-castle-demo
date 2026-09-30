@@ -100,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           {/* Zone 1: Single text element wordmark + 36px round logo badge */}
           <a
             href="#hero"
-            className="flex items-center gap-2.5 focus-visible:outline-hidden group"
+            className="flex items-center gap-2.5 min-h-[44px] py-1 focus-visible:outline-hidden group"
             aria-label="Takashi's Castle Home"
           >
             <img
@@ -108,13 +108,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
               alt="Takashi's Castle Logo"
               width={36}
               height={36}
-              className="w-9 h-9 object-contain rounded-full transition-transform duration-150 group-hover:scale-105"
+              className="w-9 h-9 object-contain rounded-full transition-transform duration-150 group-hover:scale-105 shrink-0"
             />
-            <div className="flex flex-col">
-              <span className="text-xl font-extrabold tracking-tight text-ink uppercase">
-                {siteConfig.brand.name}
-              </span>
-              <span className="text-[11px] font-semibold tracking-widest text-ink/60 uppercase">
+            <div className="flex flex-col justify-center">
+              <span role="img" aria-label="Takashi's Castle" className="wordmark" />
+              <span className="text-[11px] font-semibold tracking-widest text-ink/60 uppercase mt-0.5">
                 {siteConfig.brand.tagline}
               </span>
             </div>
@@ -179,19 +177,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           >
             {/* Top Bar inside Overlay */}
             <div className="flex items-center justify-between border-b border-ink/10 pb-6">
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2.5 min-h-[44px]">
                 <img
                   src="/images/logo-badge.png"
                   alt="Takashi's Castle Logo"
                   width={36}
                   height={36}
-                  className="w-9 h-9 object-contain rounded-full"
+                  className="w-9 h-9 object-contain rounded-full shrink-0"
                 />
-                <div>
-                  <span className="text-lg font-extrabold tracking-tight text-ink uppercase">
-                    {siteConfig.brand.name}
-                  </span>
-                  <span className="block text-[10px] font-semibold tracking-widest text-ink/60 uppercase">
+                <div className="flex flex-col justify-center">
+                  <span role="img" aria-label="Takashi's Castle" className="wordmark" />
+                  <span className="block text-[10px] font-semibold tracking-widest text-ink/60 uppercase mt-0.5">
                     {siteConfig.brand.tagline}
                   </span>
                 </div>
